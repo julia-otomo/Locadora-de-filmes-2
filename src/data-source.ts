@@ -1,6 +1,5 @@
 import "dotenv/config";
 import path from "path";
-import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import AppError from "./error";
 
@@ -40,4 +39,4 @@ const dataSourceConfig = (): DataSourceOptions => {
 
 const AppDataSource = new DataSource(dataSourceConfig());
 
-export default AppDataSource;
+export { AppDataSource };
