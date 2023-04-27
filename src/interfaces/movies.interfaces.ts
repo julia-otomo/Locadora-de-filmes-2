@@ -5,4 +5,11 @@ type IMovieRequest = z.infer<typeof movieRequestSchema>;
 
 type IMovie = z.infer<typeof movieSchema>;
 
-export { IMovieRequest, IMovie };
+interface IGetMovies {
+  prevPage: string | null;
+  nextPage: string | null;
+  count: number;
+  data: IMovie[];
+}
+
+export { IMovieRequest, IMovie, IGetMovies };

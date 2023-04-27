@@ -11,16 +11,19 @@ const verifyNameMiddleware = async (
 ): Promise<void> => {
   const movieName: string = request.body.name;
 
-  const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie);
+  if (movieName) {
+    const movieRepository: Repository<Movie> =
+      AppDataSource.getRepository(Movie);
 
-  const findMovie: boolean | null = await movieRepository.exist({
-    where: {
-      name: movieName,
-    },
-  });
+    const findMovie: boolean | null = await movieRepository.exist({
+      where: {
+        name: movieName,
+      },
+    });
 
-  if (findMovie) {
-    throw new AppError("Movie already exists.", 409);
+    if (findMovie) {
+      throw new AppError("Movie already exists.", 409);
+    }
   }
 
   next();

@@ -4,7 +4,9 @@ import { movieRequestSchema, movieSchema } from "../schemas/movies.schemas";
 import verifyNameMiddleware from "../middlewares/verifyName.middleware";
 import {
   createMovieController,
+  deleteMovieController,
   getAllMoviesController,
+  updateMovieController,
 } from "../controllers/movies.controllers";
 import verifyIdMiddleware from "../middlewares/verifyId.middleware";
 
@@ -18,5 +20,15 @@ moviesRouter.post(
 );
 
 moviesRouter.get("", getAllMoviesController);
+
+moviesRouter.patch(
+  "/:id",
+  validateRequestBody(movieRequestSchema.partial()),
+  verifyIdMiddleware,
+  verifyNameMiddleware,
+  updateMovieController
+);
+
+moviesRouter.delete("/:id", verifyIdMiddleware, deleteMovieController);
 
 export default moviesRouter;
